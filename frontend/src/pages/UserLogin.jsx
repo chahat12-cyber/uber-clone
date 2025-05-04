@@ -1,16 +1,32 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/userContext";
+import axios from "axios";
 const UserLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setpasword] = useState("");
   const [userData, setUserData] = useState({});
-  const submitjHandler = (e) => {
+  const navigate = useNavigate();
+
+  const [user, setUser] = useContext(UserDataContext);
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setUserData({
+    const userData = {
       email: email,
       password: password,
-    });
+    };
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/users/login`,
+      userData
+    );
+    console.log(response.status);
+
+    if (response.status === 201) {
+      const data = response.data;
+      setUser(data.user);
+      localStorage.setItem('token', data.token)
+      navigate("/home");
+    }
     setEmail("");
     setpasword("");
   };
@@ -24,7 +40,7 @@ const UserLogin = () => {
 
         <form
           onSubmit={(e) => {
-            submitjHandler(e);
+            submitHandler(e);
           }}
         >
           <h3 className="text-lg font-medium mb-2 ">What's Your Email</h3>
@@ -52,22 +68,26 @@ const UserLogin = () => {
             required
             placeholder="password"
           ></input>
-          <Link className="bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg placeholder:text-base">
+          <button
+            type="submit"
+            className="bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg placeholder:text-base"
+          >
             Login
-          </Link>
+          </button>
         </form>
         <p className="text-center mt-10">
           {" "}
           New here ?{" "}
           <Link to="/user-signup" className=" mb-3 text-blue-600 ">
-          Register as a User
+            Register as a User
           </Link>
         </p>
       </div>
       <div>
-        <Link 
-        to='/captain-login'
-        className="bg-[#10b401] flex items-center justify-center  text-white font-semibold mb-7 rounded px-4 py-2 w-full text-lg placeholder:text-base">
+        <Link
+          to="/captain-login"
+          className="bg-[#10b401] flex items-center justify-center  text-white font-semibold mb-7 rounded px-4 py-2 w-full text-lg placeholder:text-base"
+        >
           Sign In As Captain
         </Link>
       </div>
