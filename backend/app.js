@@ -6,8 +6,8 @@ const express= require('express');
 const connectToDb= require('./db/db');
 const userRouter= require('./routes/user_route');
 const captainRouter= require('./routes/captain_routes')
-
-
+const mapRouter= require('./routes/maps_routes')
+const rideRoutes= require('./routes/ride_routes');
 const app= express();
 
 connectToDb();
@@ -22,5 +22,7 @@ app.get('/', (req,res)=> {
 })
 app.use('/users', userRouter);
 app.use('/captain', captainRouter);
+app.use('/maps', mapRouter);
+app.use('/rides', rideRoutes);
 
 module.exports = app;
