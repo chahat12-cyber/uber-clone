@@ -55,16 +55,7 @@ const LookingForDriver = (props) => {
         </p>
       </div>
     </div>
-    <button
-      onClick={() => {
-        console.log("Confirm button clicked", props);
-        props.createRide();
-        props.setConfirmRide(false)
-        props.setVehicleFound(true);
-      }}
-      className="w-full bg-green-500 text-white py-2 rounded-md">
-      Confirm
-    </button>
+
   </div>
   )
 }

@@ -5,7 +5,6 @@ import UserSignUp from "./pages/UserSignUp";
 import CaptainLogin from "./pages/captainLogin";
 import CaptainSignUp from "./pages/CaptainSignUp";
 import Intro from "./pages/Intro";
-import Home from "./pages/home";
 import UserProtectedWrapper from "./wrapper/UserProtectedWrapper";
 import UserLogout from "./pages/UserLogout";
 import CaptainProtectedWrapper from "./wrapper/CaptainProtectedWrapper";
@@ -13,6 +12,7 @@ import CaptainHome from "./pages/CaptainHome";
 import CaptainLogout from "./pages/CaptainLogout";
 import Riding from "./pages/Riding";
 import CaptainRiding from "./pages/CaptainRiding";
+import Home from "./pages/Home";
 
 const App = () => {
   return (

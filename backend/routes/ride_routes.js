@@ -21,4 +21,22 @@ router.get('/get-fare',
 );
 
 
+router.post('/confirm-ride',
+    body('rideId').isString().isLength({ min: 1 }).withMessage('Ride ID is required'),
+    userAuth.authCaptain,
+    RideController.confirmRide
+)
+router.get('/start-ride', 
+    query('rideId').isString().isLength({ min: 1 }).withMessage('Ride ID is required'),
+    query('otp').isString().isLength({ min: 1 }).withMessage('OTP is required'),
+    userAuth.authCaptain,
+    RideController.startRide
+);
+
+router.post('/end-ride', 
+    body('rideId').isString().isLength({ min: 1 }).withMessage('Ride ID is required'),
+    userAuth.authCaptain,
+    RideController.endRide
+)
+
 module.exports = router;
